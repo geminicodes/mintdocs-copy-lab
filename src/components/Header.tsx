@@ -13,7 +13,7 @@ export function Header() {
       className="max-w-6xl mx-auto px-6 py-6 flex items-center justify-between"
     >
       <div className="flex items-center gap-3">
-        <div className="w-10 h-10 bg-gradient-brand rounded flex items-center justify-center text-primary-foreground font-bold shadow-lg">
+        <div className="w-10 h-10 bg-white dark:bg-white rounded flex items-center justify-center text-black font-bold shadow-lg">
           MD
         </div>
         <span className="text-lg font-semibold">MintDocs</span>

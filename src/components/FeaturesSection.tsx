@@ -35,8 +35,8 @@ export function FeaturesSection() {
               transition={{ delay: i * 0.04, duration: 0.16 }}
               className="bg-card border border-border p-6 rounded-2xl shadow-lg hover:shadow-xl transition-fast"
             >
-              <div className="w-12 h-12 bg-gradient-brand rounded-xl flex items-center justify-center mb-4 shadow-lg">
-                <Icon className="w-6 h-6 text-primary-foreground" />
+              <div className="w-12 h-12 bg-white dark:bg-white rounded-xl flex items-center justify-center mb-4 shadow-lg">
+                <Icon className="w-6 h-6 text-black" />
               </div>
               <h4 className="font-semibold text-lg mb-2">{feature.title}</h4>
               <p className="text-sm text-muted-foreground leading-relaxed">

@@ -28,9 +28,6 @@ export function PersonaReactions() {
               transition={{ delay: 0.02 * i, duration: 0.16 }}
               className="flex items-start gap-4 bg-secondary/50 p-4 rounded-xl hover:bg-secondary transition-fast"
             >
-              <div className={`w-12 h-12 rounded-full bg-gradient-to-br ${comment.color} flex items-center justify-center text-white font-bold text-lg shadow-lg shrink-0`}>
-                {comment.label[0]}
-              </div>
               <div className="flex-1">
                 <div className="text-sm font-semibold mb-1">{comment.label}</div>
                 <div className="text-sm text-muted-foreground leading-relaxed">{comment.text}</div>
