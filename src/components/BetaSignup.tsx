@@ -1,7 +1,6 @@
 import { useState, FormEvent } from "react";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
-import { supabase } from "@/integrations/supabase/client";
 
 type SignupState = "idle" | "loading" | "success" | "error";
 
@@ -21,18 +20,15 @@ export function BetaSignup() {
     }
 
     try {
-      // Insert email into Supabase beta_signups table
-      const { error } = await supabase
-        .from('beta_signups')
-        .insert([{ email }]);
-
-      if (error) {
-        console.error("Supabase error:", error);
-        toast.error("Something went wrong. Please try again.");
-        setSignupState("error");
-        return;
-      }
-
+      // TODO: Add your Supabase credentials to connect
+      // When ready, uncomment and configure:
+      // import { createClient } from '@supabase/supabase-js';
+      // const supabase = createClient('YOUR_URL', 'YOUR_ANON_KEY');
+      // const { error } = await supabase.from('beta_signups').insert([{ email }]);
+      
+      // Temporary simulation for demo
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
       setSignupState("success");
       setEmail("");
       toast.success("Thanks! Check your inbox — we'll be in touch when beta launches.");
