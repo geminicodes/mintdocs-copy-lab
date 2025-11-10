@@ -1,6 +1,7 @@
 import { useState, FormEvent } from "react";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
 
 type SignupState = "idle" | "loading" | "success" | "error";
 
@@ -19,12 +20,27 @@ export function BetaSignup() {
       return;
     }
 
-    // Simulate API call (replace with actual backend when available)
-    setTimeout(() => {
+    try {
+      // Insert email into Supabase beta_signups table
+      const { error } = await supabase
+        .from('beta_signups')
+        .insert([{ email }]);
+
+      if (error) {
+        console.error("Supabase error:", error);
+        toast.error("Something went wrong. Please try again.");
+        setSignupState("error");
+        return;
+      }
+
       setSignupState("success");
       setEmail("");
       toast.success("Thanks! Check your inbox — we'll be in touch when beta launches.");
-    }, 1000);
+    } catch (error) {
+      console.error("Error submitting email:", error);
+      toast.error("Something went wrong. Please try again.");
+      setSignupState("error");
+    }
   };
 
   return (
@@ -52,14 +68,22 @@ export function BetaSignup() {
       </p>
 
       {signupState === "success" && (
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.18 }}
-          className="mt-4 text-sm text-foreground font-medium text-center"
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3 }}
+          className="mt-8 p-6 bg-card border border-border rounded-2xl text-center"
         >
-          ✓ You're on the list! Check your inbox soon.
-        </motion.p>
+          <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg className="w-8 h-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+            </svg>
+          </div>
+          <h3 className="text-xl font-semibold mb-2">You're on the waitlist! 🎉</h3>
+          <p className="text-muted-foreground">
+            Check your inbox — we'll send you a confirmation email and notify you when beta launches.
+          </p>
+        </motion.div>
       )}
     </form>
   );
